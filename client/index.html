@@ -7,38 +7,99 @@
   <script src="https://fb.me/react-15.1.0.js"></script>
   <script src="https://fb.me/react-dom-15.1.0.js"></script>
 </head>
-  <div id="mount-point"></div>
-    
+
+  <div class="container">
+    <div id="container" class="col-md-8 col-md-offset-2"></div>
+  </div> 
+
   <!-- non react code -->
 
   <script type="text/jsx">
 
-    var World = React.createClass({
+    // a single country
 
-        getInitialState: function() {
-          return {
-            countries: []
-          };
-        },
+    var Country = function(country, action) {
+      var output = country.name;
+      return (<li onClick(action)> output </li>)
+    }
 
-        componentWillMount: function () {
-          this.setState({items: this.state.countries});
-        },
+    var CountryList = React.createClass({
 
-        render: function (){
-          return (
-            <ul>
-              {
-                this.props.worlds.map(function(country) {
-                  return <li key={country}>{country}</li>
-                })
-              }
-            </ul>
-          )
+      doSomething: function() {
+        // do something:
+        // open wikipedia
+        // open D3 modal
+      }
+
+      render: function() {
+        return (
+          <ul>
+            {
+              this.props.countries.map(function(country) {
+                // return <Country />
+                // return a country somehow, using country and doSomething                
+              })
+            }          
+          </ul>
+        )
+      }
+    });
+
+    var WorldDataApp = React.createClass({
+
+      filterCountries: function() {
+        // search for a country
+      },
+      changeGraphData: function(id) {
+        // do something with D3
+      },
+      getInitialState: function() {
+        return {
+          countries: [] 
         };
+      },
+      componentWillMount: function() {
+        this.setState({countries: this.props.data});
+        // this.setState({countries: JSONWorldData});
+      },
+      render: function (){
+        return (
+          <div className="world-list">
+            // a button to do something ... 
+            <CountryList countries=this.state.countries/>
+            // <CountryList countries=this.state.countries/ onClick={this.changeGraphData.bind(this)}/>
+          </div>
+        )
+      };
     });    
-
-    ReactDOM.render(<World/>, document.getElementByID("mount-point"));
+    
+    var JSONWorldData = [];
+    // later, add the changeGraph function to the list
+    ReactDOM.render(<WorldDataApp data=JSONWorldData/ >, document.getElementByID("container"));
 
   </script>
+
+  <script type="text/javascript">
+
+    // individual steps
+
+    var getDataFromAPI = function(apiEndPoint) {
+      // try to make the AJAX call
+        // 
+        //
+
+    };
+
+    var mungeData = function(rawData) {
+
+    };
+
+    var processDataForReact = function(apiEndPoint) {
+
+    };
+
+    processDataForReact();
+
+  </script>
+
 </html>
